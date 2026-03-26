@@ -1,22 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manny Tech | Innovating the Future</title>
+    <style>
+        /* Modern Tech Aesthetic */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0B0E14; /* Dark tech background */
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
 
-  <title>HTML</title>
-  
-  <!-- HTML -->
-  
+        /* Hero Section */
+        .landing-container {
+            text-align: center;
+            padding: 20px;
+        }
 
-  <!-- Custom Styles -->
-  <link rel="stylesheet" href="style.css">
+        h1 {
+            font-size: 5rem;
+            margin: 0;
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+            margin-top: 10px;
+            letter-spacing: 2px;
+        }
+
+        /* Call to Action Button */
+        .cta-button {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 1rem;
+            color: #fff;
+            background: transparent;
+            border: 2px solid #00d2ff;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: #00d2ff;
+            box-shadow: 0 0 20px #00d2ff;
+            color: #0b0e14;
+        }
+
+        /* Simple Fade-in Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
-
 <body>
-  <p>Nothing to see here...</p>
-  </p>
+
+    <div class="landing-container">
+        <h1>Manny Tech</h1>
+        <p>Leading the next generation of digital solutions.</p>
+        <a href="portfolio.html" class="cta-button">Explore Our Tech</a>
+    </div>
 
 </body>
 </html>
+  
