@@ -24,7 +24,7 @@
 
 <div class="quiz-container" id="quiz-box">
     <div class="header">
-        <span>Manny Tech Quiz | <span id="q-num">1</span>/100</span>
+        <span>Manny Tech Quiz | <span id="q-num">1</span>/6</span>
         <span>Score: <span id="score">0</span></span>
     </div>
     <div class="question" id="q-text">Loading question...</div>
@@ -34,7 +34,7 @@
 
 <div class="quiz-container score-screen" id="result-box">
     <h1>Quiz Completed!</h1>
-    <p style="font-size: 1.5rem;">Your final score: <span id="final-score" style="color: var(--primary);">0</span> / 100</p>
+    <p style="font-size: 1.5rem;">Your final score: <span id="final-score" style="color: var(--primary);">0</span> / 6</p>
     <button class="btn-restart" onclick="location.reload()">Restart Quiz</button>
 </div>
 
@@ -49,7 +49,7 @@
     ];
 
     // This loop fills the remaining spots to reach 100 so the app doesn't break
-    while(questions.length < 100) {
+    while(questions.length < 6) {
         questions.push({ 
             q: `General Science Question ${questions.length + 1}: What is the chemical symbol for Water?`, 
             a: ["CO2", "O2", "H2O", "NaCl"], 
@@ -102,7 +102,7 @@
         // Show Next Button
         const nextBtn = document.createElement("button");
         nextBtn.className = "btn-next";
-        nextBtn.innerText = currentIdx === 99 ? "See Final Results" : "Next Question →";
+        nextBtn.innerText = currentIdx === 5 ? "See Final Results" : "Next Question →";
         nextBtn.onclick = nextQuestion;
         document.getElementById("action-area").appendChild(nextBtn);
     }
