@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Enyeribe Emmanuel Portfolio</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
+  <style>
     /* Body & Background */
     body {
       margin: 0;
@@ -21,7 +23,7 @@
 
     /* Particle Canvas */
     #particles {
-      position: fixed; /* fixed so it doesn't scroll with content */
+      position: fixed;
       width: 100%;
       height: 100%;
       z-index: 0;
@@ -39,7 +41,7 @@
       padding: 2rem 1rem;
     }
 
-    /* Animated Gradient Heading */
+    /* Hero / Heading */
     h1 {
       font-size: 5rem;
       text-align: center;
@@ -52,7 +54,6 @@
       letter-spacing: 6px;
     }
 
-    /* PERSONAL DATA landing animation restored */
     h3 {
       font-size: 2rem;
       text-align: center;
@@ -62,10 +63,10 @@
       letter-spacing: 4px;
       opacity: 0;
       animation: fadeInH3 2s ease forwards;
-      animation-delay: 1s; /* appears after 1 second */
+      animation-delay: 1s;
     }
 
-    /* Cards */
+    /* Portfolio Cards */
     .card {
       background: rgba(255, 255, 255, 0.05);
       padding: 1.5rem;
@@ -74,9 +75,7 @@
       border-radius: 10px;
     }
 
-    p {
-      margin: 0.8rem 0;
-    }
+    p { margin: 0.8rem 0; }
 
     blockquote {
       margin: 1rem 0;
@@ -111,36 +110,22 @@
     }
 
     /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInH3 {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes gradientAnim {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px);} to {opacity: 1; transform: translateY(0);} }
+    @keyframes fadeInH3 { from { opacity: 0; transform: translateY(-20px);} to {opacity: 1; transform: translateY(0);} }
+    @keyframes gradientAnim { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
     /* Responsive */
-    @media (max-width: 768px) {
-      h1 { font-size: 3.5rem; }
-      h3 { font-size: 1.5rem; }
-      .cta-button { padding: 0.8rem 2rem; font-size: 1rem; }
+    @media (max-width: 768px) { 
+      h1 { font-size: 3.5rem; } 
+      h3 { font-size: 1.5rem; } 
+      .cta-button { padding: 0.8rem 2rem; font-size: 1rem; } 
     }
-
-    @media (max-width: 480px) {
-      h1 { font-size: 2.8rem; }
-      h3 { font-size: 1.2rem; }
-      .card { padding: 1rem; }
-      .cta-button { padding: 0.6rem 1.8rem; font-size: 0.95rem; }
+    @media (max-width: 480px) { 
+      h1 { font-size: 2.8rem; } 
+      h3 { font-size: 1.2rem; } 
+      .card { padding: 1rem; } 
+      .cta-button { padding: 0.6rem 1.8rem; font-size: 0.95rem; } 
     }
-
   </style>
 </head>
 <body>
@@ -152,6 +137,7 @@
     <h1>Enyeribe Emmanuel</h1>
     <h3>Personal Data</h3>
 
+    <!-- Portfolio Cards -->
     <div class="card">
       <p title="Full Name">My name is Enyeribe Emmanuel Chijioke.</p>
       <p>I am a teenage boy of 18 years aspiring to be a web developer.</p>
@@ -177,21 +163,22 @@
     <a href="science questions 2.html" class="cta-button">Click here for a short science quiz</a>
   </div>
 
+  <!-- Particle Script -->
   <script>
-    // Particle background
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
-    let particlesArray;
+    let particlesArray = [];
+    let mouse = { x: null, y: null };
 
     function setCanvasSize() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
     setCanvasSize();
-    window.addEventListener('resize', () => {
-      setCanvasSize();
-      initParticles();
-    });
+    window.addEventListener('resize', () => { setCanvasSize(); initParticles(); });
+
+    window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
+    window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
 
     class Particle {
       constructor() {
@@ -201,6 +188,12 @@
         this.speedX = (Math.random() - 0.5) * 1;
         this.speedY = (Math.random() - 0.5) * 1;
       }
+      draw() {
+        ctx.fillStyle = 'rgba(0,210,255,0.6)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+        ctx.fill();
+      }
       update() {
         this.x += this.speedX;
         this.y += this.speedY;
@@ -208,33 +201,58 @@
         if(this.x > canvas.width || this.x < 0) this.speedX *= -1;
         if(this.y > canvas.height || this.y < 0) this.speedY *= -1;
 
+        if(mouse.x && mouse.y){
+          let dx = this.x - mouse.x;
+          let dy = this.y - mouse.y;
+          let dist = Math.sqrt(dx*dx + dy*dy);
+          if(dist < 80){
+            this.x += dx/20;
+            this.y += dy/20;
+          }
+        }
+
         this.draw();
-      }
-      draw() {
-        ctx.fillStyle = 'rgba(0,210,255,0.6)';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
       }
     }
 
-    function initParticles() {
+    function initParticles(){
       particlesArray = [];
-      const numberOfParticles = 80;
-      for(let i = 0; i < numberOfParticles; i++) {
+      const numberOfParticles = window.innerWidth < 768 ? 50 : 80;
+      for(let i = 0; i < numberOfParticles; i++){
         particlesArray.push(new Particle());
       }
     }
 
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    function connectParticles(){
+      let opacity;
+      const maxDistance = window.innerWidth < 768 ? 80 : 100;
+      for(let a=0; a<particlesArray.length; a++){
+        for(let b=a; b<particlesArray.length; b++){
+          let dx = particlesArray[a].x - particlesArray[b].x;
+          let dy = particlesArray[a].y - particlesArray[b].y;
+          let distance = Math.sqrt(dx*dx + dy*dy);
+          if(distance < maxDistance){
+            opacity = 1 - (distance/maxDistance);
+            ctx.strokeStyle = 'rgba(0,210,255,' + opacity + ')';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animate(){
+      ctx.clearRect(0,0,canvas.width, canvas.height);
       particlesArray.forEach(p => p.update());
-      requestAnimationFrame(animateParticles);
+      connectParticles();
+      requestAnimationFrame(animate);
     }
 
     initParticles();
-    animateParticles();
+    animate();
   </script>
-
 </body>
 </html>
