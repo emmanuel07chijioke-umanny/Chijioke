@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manny Tech Science Quiz</title>
+<style>
+    :root { --primary: #00d2ff; --bg: #0b0e14; --card: #1a1f29; --success: #28a745; --danger: #dc3545; }
+    body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: white; display: flex; justify-content: center; padding: 20px; margin: 0; }
+    .quiz-container { background: var(--card); padding: 30px; border-radius: 15px; width: 100%; max-width: 600px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-top: 50px; }
+    .header { display: flex; justify-content: space-between; margin-bottom: 20px; color: var(--primary); font-weight: bold; border-bottom: 1px solid #333; padding-bottom: 10px; }
+    .question { font-size: 1.3rem; margin-bottom: 20px; min-height: 60px; line-height: 1.5; }
+    .options-grid { display: grid; gap: 12px; }
+    button.option { background: #252d3d; border: 1px solid #3a4454; color: white; padding: 15px; border-radius: 8px; cursor: pointer; text-align: left; transition: 0.2s; font-size: 1rem; }
+    button.option:hover { border-color: var(--primary); }
+    .explanation { margin-top: 15px; background: #111622; padding: 10px; border-left: 4px solid var(--primary); border-radius: 5px; font-size: 0.95rem; line-height: 1.4; display:none; }
+    .score-screen { text-align: center; display: none; }
+    .btn-next { background: var(--primary); color: #000; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; margin-top: 20px; font-weight: bold; width: 100%; }
+    .btn-restart { background: #fff; color: #000; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 20px; font-weight: bold; }
+    .motivation { font-size: 1.2rem; margin-top: 10px; color: var(--primary); }
+</style>
+</head>
+<body>
+
+<div class="quiz-container" id="quiz-box">
+    <div class="header">
+        <span>Manny Tech Quiz | <span id="q-num">1</span>/20</span>
+        <span>Score: <span id="score">0</span></span>
+    </div>
+    <div class="question" id="q-text">Loading question...</div>
+    <div id="options" class="options-grid"></div>
+    <div id="explanation" class="explanation"></div>
+    <div id="action-area"></div>
+</div>
+
+<div class="quiz-container score-screen" id="result-box">
+    <h1>Quiz Completed!</h1>
+    <p style="font-size: 1.5rem;">Your final score: <span id="final-score" style="color: var(--primary);">0</span> / 20</p>
+    <p class="motivation" id="motivation-msg"></p>
+    <button class="btn-restart" onclick="location.reload()">Restart Quiz</button>
+</div>
+
+<script>
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+const questions = [
+    { q: "What is the SI unit of Capacitance?", a: ["Volt", "Farad", "Ohm", "Ampere"], correct: 1, explanation: "Farad is the SI unit of capacitance, named after Michael Faraday." },
+    { q: "Which gas do plants absorb during photosynthesis?", a: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Helium"], correct: 2, explanation: "Plants absorb carbon dioxide and release oxygen during photosynthesis." },
+    { q: "What is the hardest natural substance on Earth?", a: ["Gold", "Iron", "Diamond", "Quartz"], correct: 2, explanation: "Diamond is the hardest naturally occurring substance known." },
+    { q: "The power house of the cell is known as?", a: ["Nucleus", "Mitochondria", "Ribosome", "Cytoplasm"], correct: 1, explanation: "Mitochondria produce energy for the cell through respiration." },
+    { q: "What is the speed of light?", a: ["300,000 km/s", "150,000 km/s", "500,000 km/s", "1,000,000 km/s"], correct: 0, explanation: "The speed of light in vacuum is approximately 300,000 km per second." },
+    { q: "The inner diameter of a small test tube can be measured accurately using a?", a: ["Micrometer screw gauge", "Pair of divider", "Meter rule", "Pair of vernier calipers"], correct: 3, explanation: "Vernier calipers are used for precise measurements of small lengths." },
+    { q: "What is the chemical symbol for Gold?", a: ["Go", "Gd", "Au", "Ag"], correct: 2, explanation: "Au is the chemical symbol for gold from its Latin name 'Aurum'." },
+    { q: "Which planet is known as the Red Planet?", a: ["Venus", "Mars", "Jupiter", "Saturn"], correct: 1, explanation: "Mars appears red due to iron oxide (rust) on its surface." },
+    { q: "What is the boiling point of water in Celsius?", a: ["90°C", "100°C", "120°C", "80°C"], correct: 1, explanation: "At standard atmospheric pressure, water boils at 100°C." },
+    { q: "Which blood cells help the body fight infections?", a: ["Red blood cells", "White blood cells", "Platelets", "Plasma"], correct: 1, explanation: "White blood cells protect the body against infections." },
+    { q: "What is the chemical formula for water?", a: ["CO2", "H2SO4", "H2O", "NaCl"], correct: 2, explanation: "H2O is water, consisting of two hydrogen atoms and one oxygen atom." },
+    { q: "Who is known as the father of modern physics?", a: ["Isaac Newton", "Albert Einstein", "Galileo Galilei", "Nikola Tesla"], correct: 1, explanation: "Albert Einstein revolutionized physics with the theory of relativity." },
+    { q: "What is the unit of electric current?", a: ["Volt", "Watt", "Ampere", "Ohm"], correct: 2, explanation: "Ampere is the SI unit of electric current, named after André-Marie Ampère." },
+    { q: "Which organ produces insulin in the human body?", a: ["Liver", "Pancreas", "Kidney", "Heart"], correct: 1, explanation: "The pancreas produces insulin to regulate blood sugar." },
+    { q: "Which gas is most abundant in the Earth's atmosphere?", a: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"], correct: 1, explanation: "Nitrogen makes up about 78% of Earth's atmosphere." },
+    { q: "What is the pH value of pure water?", a: ["7", "0", "14", "5"], correct: 0, explanation: "Pure water is neutral with a pH of 7." },
+    { q: "Which part of the plant conducts photosynthesis?", a: ["Root", "Stem", "Leaf", "Flower"], correct: 2, explanation: "Leaves contain chlorophyll which captures sunlight for photosynthesis." },
+    { q: "Which force keeps planets in orbit around the sun?", a: ["Magnetic", "Gravitational", "Electrostatic", "Nuclear"], correct: 1, explanation: "Gravity keeps planets in orbit around the sun." },
+    { q: "What is the chemical symbol for Sodium?", a: ["S", "Na", "So", "N"], correct: 1, explanation: "Na is the chemical symbol for sodium from the Latin 'Natrium'." },
+    { q: "What is the freezing point of water in Celsius?", a: ["0°C", "100°C", "-10°C", "32°C"], correct: 0, explanation: "Water freezes at 0°C under normal atmospheric pressure." }
+];
+
+shuffleArray(questions);
+
+let currentIdx = 0;
+let score = 0;
+let canClick = true;
+
+function loadQuestion() {
+    canClick = true;
+    const qData = questions[currentIdx];
+    document.getElementById("q-num").innerText = currentIdx + 1;
+    document.getElementById("q-text").innerText = qData.q;
+    document.getElementById("explanation").style.display = "none";
+    document.getElementById("explanation").innerText = "";
+    document.getElementById("action-area").innerHTML = ""; 
+    
+    const optionsEl = document.getElementById("options");
+    optionsEl.innerHTML = "";
+    
+    qData.a.forEach((opt, i) => {
+        const btn = document.createElement("button");
+        btn.className = "option";
+        btn.id = `opt-${i}`;
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(i);
+        optionsEl.appendChild(btn);
+    });
+}
+
+function checkAnswer(selected) {
+    if (!canClick) return;
+    canClick = false;
+
+    const correctIdx = questions[currentIdx].correct;
+    const explanationEl = document.getElementById("explanation");
+
+    if (selected === correctIdx) {
+        score++;
+        document.getElementById("score").innerText = score;
+        document.getElementById(`opt-${selected}`).style.background = "var(--success)";
+        explanationEl.style.color = "var(--success)";
+    } else {
+        document.getElementById(`opt-${selected}`).style.background = "var(--danger)";
+        document.getElementById(`opt-${correctIdx}`).style.background = "var(--success)";
+        explanationEl.style.color = "var(--danger)";
+    }
+
+    explanationEl.innerText = questions[currentIdx].explanation;
+    explanationEl.style.display = "block";
+
+    const nextBtn = document.createElement("button");
+    nextBtn.className = "btn-next";
+    nextBtn.innerText = currentIdx === questions.length - 1 ? "See Final Results" : "Next Question →";
+    nextBtn.onclick = nextQuestion;
+    document.getElementById("action-area").appendChild(nextBtn);
+}
+
+function nextQuestion() {
+    currentIdx++;
+    if (currentIdx < questions.length) {
+        loadQuestion();
+    } else {
+        showResults();
+    }
+}
+
+function showResults() {
+    document.getElementById("quiz-box").style.display = "none";
+    document.getElementById("result-box").style.display = "block";
+    document.getElementById("final-score").innerText = score;
+
+    const motivationMsg = document.getElementById("motivation-msg");
+    if(score === 20){
+        motivationMsg.innerText = "🎉 Amazing! Perfect score! Keep up the great work!";
+    } else if(score >= 15){
+        motivationMsg.innerText = "🌟 Great job! You're very knowledgeable!";
+    } else if(score >= 10){
+        motivationMsg.innerText = "👍 Good effort! Keep learning and improving!";
+    } else{
+        motivationMsg.innerText = "💡 Don't worry! Keep practicing and you'll get better!";
+    }
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
