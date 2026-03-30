@@ -1,78 +1,240 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>
-    MY PORTFOLIO
-  </title>
-  <style> 
-  body{ background: linear-gradient(90deg, #ED961D61, #A7C3A3);{
-    
-  }}
-h3{
-  font-size: 1.9rem;
-  margin: 0;
-  background: linear-gradient(90deg, rgba(52, 209, 222, 0.84), #3a7bd5);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-transform: uppercase;
-  letter-spacing: 5px;
-  animation: fadeIn 4s ease-in-out;
-}
-.cta-button {
-            margin-top: 3px;
-            padding: 15px 40px;
-            font-size: 1rem;
-            color: #5EA8EC;
-            background: transparent;
-            border: 2px solid #00d2ff;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
- .cta-button:hover {
-  background: #FF0000;
-  box-shadow: 0 0 40px #FF0000;
-  color: #072560;
-}
-@keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-            .
-        .
-        
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enyeribe Emmanuel Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+    /* Body & Background */
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      color: #ffffff;
+      background: #0B0E14;
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Particle Canvas */
+    #particles {
+      position: fixed; /* fixed so it doesn't scroll with content */
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      top: 0;
+      left: 0;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 900px;
+      width: 90%;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      padding: 2rem 1rem;
+    }
+
+    /* Animated Gradient Heading */
+    h1 {
+      font-size: 5rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, #00d2ff, #3a7bd5, #ED961D);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientAnim 5s ease infinite, fadeIn 2s ease-in-out;
+      letter-spacing: 6px;
+    }
+
+    /* PERSONAL DATA landing animation restored */
+    h3 {
+      font-size: 2rem;
+      text-align: center;
+      color: #5EA8EC;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      opacity: 0;
+      animation: fadeInH3 2s ease forwards;
+      animation-delay: 1s; /* appears after 1 second */
+    }
+
+    /* Cards */
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1.5rem;
+      margin: 1rem 0;
+      border-left: 5px solid #00d2ff;
+      border-radius: 10px;
+    }
+
+    p {
+      margin: 0.8rem 0;
+    }
+
+    blockquote {
+      margin: 1rem 0;
+      padding: 1rem;
+      background: rgba(0, 210, 255, 0.1);
+      border-left: 5px solid #00d2ff;
+      font-style: italic;
+      color: #a0e7ff;
+    }
+
+    /* CTA Button */
+    .cta-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 1rem 3rem;
+      font-size: 1.1rem;
+      color: #fff;
+      background: transparent;
+      border: 2px solid #00d2ff;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .cta-button:hover,
+    .cta-button:focus {
+      background: #00d2ff;
+      color: #0B0E14;
+      box-shadow: 0 0 25px #00d2ff;
+      outline: none;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInH3 {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes gradientAnim {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 { font-size: 3.5rem; }
+      h3 { font-size: 1.5rem; }
+      .cta-button { padding: 0.8rem 2rem; font-size: 1rem; }
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 2.8rem; }
+      h3 { font-size: 1.2rem; }
+      .card { padding: 1rem; }
+      .cta-button { padding: 0.6rem 1.8rem; font-size: 0.95rem; }
+    }
+
   </style>
 </head>
-
 <body>
-    <h3>
-      PERSONAL DATA
-      </h3>
-      
-      <p title="My full name">
-      My name is Enyeribe Emmanuel Chijioke</p>
-      <p> I am a tennage boy of 18 years aspiring to be a web developer.</p>
-      <div class="name"id="Emmanuel"> As a boy, I was growing up with the aim of becoming a medical doctor, not until I found out that chemistry  was my bad. I tried all possible means to see if I can fit in to this career but all was to  no avail. Then I discovererd that I was good in calculation and critical thinking.That became my turning point. I switched from  medicine to Software engeneering. 
-      </div>
-    <p>
-      Life is all about what you like doing- passion, dreams, aspirations and the so like are things that I look up  to.
-    </p>  
-      <p>
-        What inspired me the most was the quest to create new things. 
-        <p>The Enugu State Governor, <i>Barr. Peter Ndubuisi Mbah</i> on the <b style="color: skyblue;">Enugu Tech Festival</b> said something that motivated me. it says
-          <blockquote> We are not to be the consumers of Technology but partakers in the building</blockquote>
-          As a result of this my aspirations grew even the more.
-          <p>
-            My advice to anyone reading this post is what <b style="color: rebeccapurple;">Swami Vivekananda</b> said,<blockquote><i>Take up one idea. Make that one idea your life_ think of it,live on that idea. Let the brain, muscles, nerves,every part of your body, be full of that idea and just leave every other idea alone.This is the way to success.</i></blockquote>
-          </p>
-        </p>
-          <a href="science questions 2.html" class="cta-button">Click here for a short science quiz 
-            
-          </a>
-    
-  </body>
+
+  <!-- Particle Canvas -->
+  <canvas id="particles"></canvas>
+
+  <div class="container">
+    <h1>Enyeribe Emmanuel</h1>
+    <h3>Personal Data</h3>
+
+    <div class="card">
+      <p title="Full Name">My name is Enyeribe Emmanuel Chijioke.</p>
+      <p>I am a teenage boy of 18 years aspiring to be a web developer.</p>
+    </div>
+
+    <div class="card">
+      <p>As a boy, I aimed to become a medical doctor, but chemistry was my weak subject. 
+      I discovered I excel in calculation and critical thinking, which became my turning point. 
+      I switched from medicine to Software Engineering.</p>
+    </div>
+
+    <div class="card">
+      <p>Life is about passion, dreams, and aspirations. What inspired me most is the quest to create new things.</p>
+      <p>The Enugu State Governor, <i>Barr. Peter Ndubuisi Mbah</i>, at the <b style="color: skyblue;">Enugu Tech Festival</b> said:</p>
+      <blockquote>We are not to be the consumers of technology but partakers in the building.</blockquote>
+    </div>
+
+    <div class="card">
+      <p>My advice to anyone reading this comes from <b style="color: rebeccapurple;">Swami Vivekananda</b>:</p>
+      <blockquote><i>Take up one idea. Make that one idea your life—think of it, live on that idea. Let every part of your body be full of that idea and leave every other idea alone. This is the way to success.</i></blockquote>
+    </div>
+
+    <a href="science questions 2.html" class="cta-button">Click here for a short science quiz</a>
+  </div>
+
+  <script>
+    // Particle background
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particlesArray;
+
+    function setCanvasSize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    setCanvasSize();
+    window.addEventListener('resize', () => {
+      setCanvasSize();
+      initParticles();
+    });
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = (Math.random() - 0.5) * 1;
+        this.speedY = (Math.random() - 0.5) * 1;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if(this.x > canvas.width || this.x < 0) this.speedX *= -1;
+        if(this.y > canvas.height || this.y < 0) this.speedY *= -1;
+
+        this.draw();
+      }
+      draw() {
+        ctx.fillStyle = 'rgba(0,210,255,0.6)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particlesArray = [];
+      const numberOfParticles = 80;
+      for(let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particlesArray.forEach(p => p.update());
+      requestAnimationFrame(animateParticles);
+    }
+
+    initParticles();
+    animateParticles();
+  </script>
+
+</body>
 </html>

@@ -5,48 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manny Tech | Innovating the Future</title>
     <style>
-        /* Modern Tech Aesthetic */
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0B0E14; /* Dark tech background */
+            background-color: #0B0E14;
             color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
+            text-align: center;
+            scroll-behavior: smooth;
         }
 
-        /* Hero Section */
         .landing-container {
-            text-align: center;
-            padding: 30px;
+            padding: 2rem;
+            max-width: 1200px;
         }
 
         h1 {
-            font-size: 5rem;
+            font-size: 8rem; /* Huge heading for desktop */
             margin: 0;
             background: linear-gradient(90deg, #00d2ff, #3a7bd5);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
-            letter-spacing: 6px;
+            letter-spacing: 8px;
             animation: fadeIn 2s ease-in-out;
         }
 
         p {
-            font-size: 1.2rem;
+            font-size: 1.6rem;
             color: #a0a0a0;
-            margin-top: 10px;
+            margin-top: 1rem;
             letter-spacing: 2px;
         }
 
-        /* Call to Action Button */
         .cta-button {
-            margin-top: 30px;
-            padding: 15px 40px;
-            font-size: 1rem;
+            margin-top: 2rem;
+            padding: 1.2rem 3.5rem;
+            font-size: 1.2rem;
             color: #fff;
             background: transparent;
             border: 2px solid #00d2ff;
@@ -57,27 +59,70 @@
             display: inline-block;
         }
 
-        .cta-button:hover {
+        .cta-button:hover,
+        .cta-button:focus {
             background: #00d2ff;
-            box-shadow: 0 0 20px #00d2ff;
+            box-shadow: 0 0 25px #00d2ff;
             color: #0b0e14;
+            outline: none;
         }
 
-        /* Simple Fade-in Animation */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Text */
+        @media (max-width: 1024px) {
+            h1 {
+                font-size: 6rem;
+                letter-spacing: 6px;
+            }
+            p {
+                font-size: 1.4rem;
+            }
+            .cta-button {
+                padding: 1rem 3rem;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 4.5rem;
+                letter-spacing: 4px;
+            }
+            p {
+                font-size: 1.2rem;
+            }
+            .cta-button {
+                padding: 0.9rem 2.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 3rem;
+                letter-spacing: 2px;
+            }
+            p {
+                font-size: 1rem;
+            }
+            .cta-button {
+                padding: 0.8rem 2rem;
+                font-size: 0.95rem;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="landing-container">
+    <main class="landing-container">
         <h1>Mäññy Tëch</h1>
         <p>Leading the next generation of digital solutions.</p>
-        <a href="portfolio.html" class="cta-button">Explore Our Tech</a>
-    </div>
+        <a href="portfolio.html" class="cta-button" aria-label="Explore our technology portfolio">Explore Our Tech</a>
+    </main>
 
 </body>
 </html>
-  
